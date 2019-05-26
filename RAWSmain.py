@@ -51,11 +51,6 @@ def get_random_article(SELECTED_LANGUAGE):
     page_link = str(page_text)
     page_link = page_text[page_text.find("canonical"):]
     page_link = page_link[page_link.find("=")+2 : page_link.find("/>")-1]
-
-    with open ("output.txt", "w") as output_file:
-        output_file.write(first_paragraph)
-    with open ("link.txt", "w") as output_file:
-        output_file.write(page_link)
     return first_paragraph, page_link
 
 
