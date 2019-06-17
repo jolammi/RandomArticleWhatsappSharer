@@ -9,12 +9,12 @@ import html2text
 
 #Control variables---------------------------------------------------------------------------------------------
 
-SELECTED_CONVERSATION = "INSERT_CONTACT_HERE" #ensure that this matches the contact or group name
+SELECTED_CONVERSATION = "INSERT CONTACT HERE" #ensure that this matches the contact or group name
 PATH_TO_CHROMEDRIVER = 'C:\chromedriver_win32\chromedriver.exe'
-PYTHON_PATH = r"C:\Users\INSERT_USERNAME_HERE\AppData\Local\Programs\Python\Python36\Memory\WebWhatsAppBot" #Used to save the WhatsApp login
+PYTHON_PATH = r"C:\Users\USERNAME_HERE\AppData\Local\Programs\Python\Python36\Memory\WebWhatsAppBot" #Used to save the WhatsApp login
 SELECTED_LANGUAGE = "en" #this shows in wikipedia article and in the payload layout, currently "fi" or "en"
-QR_CODE_PERIOD_SECONDS = 30 #seconds
-SLEEP_BETWEEN_MESSAGES = 300 #seconds, 300 means once in five minutes
+LOGIN_PERIOD_SECONDS = 20 #seconds
+SLEEP_BETWEEN_MESSAGES = 600 #seconds, 600 means once in ten minutes
 
 #/Control variables--------------------------------------------------------------------------------------------
 
@@ -51,6 +51,11 @@ def get_random_article(SELECTED_LANGUAGE):
     page_link = str(page_text)
     page_link = page_text[page_text.find("canonical"):]
     page_link = page_link[page_link.find("=")+2 : page_link.find("/>")-1]
+
+    with open ("output.txt", "w") as output_file:
+        output_file.write(first_paragraph)
+    with open ("link.txt", "w") as output_file:
+        output_file.write(page_link)
     return first_paragraph, page_link
 
 
@@ -66,9 +71,9 @@ def parse_first_paragraph(text, handler,driver):
         text = text[:text.find("[")] + text[text.find("[")+3:] #get rid of references like [1]
     return text
 
-def open_whatsapp_web(QR_CODE_PERIOD_SECONDS,driver):
+def open_whatsapp_web(LOGIN_PERIOD_SECONDS,driver):
     driver.get('https://web.whatsapp.com')
-    time.sleep(QR_CODE_PERIOD_SECONDS)
+    time.sleep(LOGIN_PERIOD_SECONDS)
     return None
 
 def send_whatsapp_message(conversation, driver, text, link, message_box):
@@ -77,7 +82,7 @@ def send_whatsapp_message(conversation, driver, text, link, message_box):
         ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.ENTER).key_up(Keys.SHIFT).perform()
         message_box.send_keys(text)
         ActionChains(driver).key_down(Keys.SHIFT).key_down(Keys.ENTER).key_up(Keys.ENTER).key_up(Keys.SHIFT).perform()
-        message_box.send_keys("Kiinnostuitko? Katso lisää: ")
+        message_box.send_keys("Lue lisää: ")
         message_box.send_keys(link + "\n")
     else:
         message_box.send_keys("Did you know that:")
@@ -92,13 +97,14 @@ def open_conversation(conversation,driver):
     search_box = driver.find_element_by_xpath('//*[@title="Search or start new chat"]')
     search_box.click()
     search_box.send_keys(conversation + "\n")
-    message_box = driver.find_element_by_css_selector('#main > footer > div._3pkkz.copyable-area > div._1Plpp > div')
+    message_box = driver.find_element_by_css_selector('#main > footer > div._2i7Ej.copyable-area > div._13mgZ > div > div._3u328.copyable-text.selectable-text')
     return message_box
+    
 
 def main_loop(SELECTED_LANGUAGE,SELECTED_CONVERSATION):
     print_help()
     driver = initialize_chromedriver(PATH_TO_CHROMEDRIVER,PYTHON_PATH)
-    open_whatsapp_web(QR_CODE_PERIOD_SECONDS,driver)
+    open_whatsapp_web(LOGIN_PERIOD_SECONDS,driver)
     message_box = open_conversation(SELECTED_CONVERSATION,driver)
     handler = initialize_html2text()
 
