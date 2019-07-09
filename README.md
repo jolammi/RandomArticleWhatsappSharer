@@ -22,14 +22,16 @@ pip3 install html2text
 ---
 ### What it isn't
 - RAWS is at a "working prototype" stage. This means, that bugs are possible.
-- Known bugs:
--- wrongly-written Wikipedia pages are likely to get printed wrongly
--- "meta" pages such as category pages don't always work
+- Known bugs:  
+-- wrongly-written Wikipedia pages are likely to get printed wrongly  
+-- "meta" pages such as category pages don't always work  
 - The app isn't totally command-line because the first-time whatsapp verification needs to be done via the GUI and the app uses GUI to operate
 ### What it is
 - A great way to either annoy or cheer up your friends
 - A great way to learn something new every day
 - A good start to develop something else to be shared via WhatsApp using Python
+
+**The element that is used for selecting the message field in WhatsApp Web may change and therefore the app may become unusable. If this happens, please notify me so that I know to repair the selector.**
   
   
   
