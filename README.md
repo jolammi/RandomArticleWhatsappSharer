@@ -31,7 +31,7 @@ pip3 install html2text
 - A great way to learn something new every day
 - A good start to develop something else to be shared via WhatsApp using Python
 
-**The element that is used for selecting the message field in WhatsApp Web may change and therefore the app may become unusable. If this happens, please notify me so that I know to repair the selector.**
+**The element that is used for selecting the message field in WhatsApp Web may change and therefore the software may become unusable. If this happens, please notify me so that I know to repair the selector.**
   
   
   
