@@ -2,6 +2,8 @@
 RAWS is a Python3 app that can be used to share random Wikipedia knowledge to a Whatsapp group or a contact periodically.
 It's great for sharing a fact of the minute/hour/day for your friend(s).
 
+**NOTE: The element that is used for selecting the message field in WhatsApp Web may change and therefore the software may become unusable. Should this happen, please raise an issue so that I know to repair the selector.**
+
 ### What it does:
   - Uses Chromedriver to drive WhatsApp web
   - Fetches a random Wikipedia article in either Finnish or English, parses the first paragraph from it and turn the HTML version to plain text with html2text python library
@@ -31,7 +33,7 @@ pip3 install html2text
 - A great way to learn something new every day
 - A good start to develop something else to be shared via WhatsApp using Python
 
-**The element that is used for selecting the message field in WhatsApp Web may change and therefore the software may become unusable. If this happens, please notify me so that I know to repair the selector.**
+
   
   
   
