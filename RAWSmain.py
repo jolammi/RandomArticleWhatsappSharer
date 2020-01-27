@@ -71,6 +71,7 @@ def parse_first_paragraph(text, handler,driver):
         text = text[:text.find("[")] + text[text.find("[")+3:] #get rid of references like [1]
     return text
 
+
 def open_whatsapp_web(LOGIN_PERIOD_SECONDS,driver):
     driver.get('https://web.whatsapp.com')
     time.sleep(LOGIN_PERIOD_SECONDS)
@@ -99,7 +100,7 @@ def open_conversation(conversation,driver):
     search_box.send_keys(conversation + "\n")
     message_box = driver.find_element_by_css_selector('#main > footer > div._2i7Ej.copyable-area > div._13mgZ > div > div._3u328.copyable-text.selectable-text')
     return message_box
-    
+
 
 def main_loop(SELECTED_LANGUAGE,SELECTED_CONVERSATION):
     print_help()
@@ -114,7 +115,7 @@ def main_loop(SELECTED_LANGUAGE,SELECTED_CONVERSATION):
         except UnicodeEncodeError:
             print("Unicode error")
             continue
-        text = parse_first_paragraph(text, handler,driver) 
+        text = parse_first_paragraph(text, handler,driver)
         send_whatsapp_message(SELECTED_CONVERSATION,driver,text,link, message_box)
         time.sleep(SLEEP_BETWEEN_MESSAGES)
         # driver.quit()
