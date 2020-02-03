@@ -119,5 +119,5 @@ def main_loop(SELECTED_LANGUAGE,SELECTED_CONVERSATION):
         send_whatsapp_message(SELECTED_CONVERSATION,driver,text,link, message_box)
         time.sleep(SLEEP_BETWEEN_MESSAGES)
         # driver.quit()
-
-main_loop(SELECTED_LANGUAGE, SELECTED_CONVERSATION)
+if __name__ == "__main__":
+    main_loop(SELECTED_LANGUAGE, SELECTED_CONVERSATION)
